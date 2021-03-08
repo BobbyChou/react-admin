@@ -1,6 +1,11 @@
+/*
+ * @Author: zhou teng
+ * @Date: 2021-03-08 21:31:35
+ * @LastEditTime: 2021-03-08 21:38:06
+ */
 import React from 'react';
 import { Button } from 'antd'
-import './index.less'
+import './App.css'
 
 function App() {
   return (
