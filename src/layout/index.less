@@ -1,0 +1,26 @@
+@import './../style/theme.less';
+@import './../index.css';
+
+.layoutContainer {
+  height: 100%;
+  background-color: @white;
+  display: flex;
+  flex-direction: column;
+
+  .layoutContent {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .layoutMenu {
+      height: 100%;
+    }
+
+    .layoutBox {
+      flex: 1;
+      height: 100%;
+      background-color: #fff;
+    }
+  }
+}

@@ -163,8 +163,8 @@ module.exports = function (webpackEnv) {
     bail: isEnvProduction,
     devtool: isEnvProduction ?
       shouldUseSourceMap ?
-      'source-map' :
-      false : isEnvDevelopment && 'cheap-module-source-map',
+        'source-map' :
+        false : isEnvDevelopment && 'cheap-module-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: isEnvDevelopment && !shouldUseReactRefresh ? [
@@ -210,9 +210,9 @@ module.exports = function (webpackEnv) {
       // Point sourcemap entries to original disk location (format as URL on Windows)
       devtoolModuleFilenameTemplate: isEnvProduction ?
         info =>
-        path
-        .relative(paths.appSrc, info.absoluteResourcePath)
-        .replace(/\\/g, '/') : isEnvDevelopment &&
+          path
+            .relative(paths.appSrc, info.absoluteResourcePath)
+            .replace(/\\/g, '/') : isEnvDevelopment &&
         (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
       // Prevents conflicts when multiple webpack runtimes (from different apps)
       // are used on the same page.
@@ -500,10 +500,10 @@ module.exports = function (webpackEnv) {
               test: sassRegex,
               exclude: sassModuleRegex,
               use: getStyleLoaders({
-                  importLoaders: 3,
-                  sourceMap: isEnvProduction ?
-                    shouldUseSourceMap : isEnvDevelopment,
-                },
+                importLoaders: 3,
+                sourceMap: isEnvProduction ?
+                  shouldUseSourceMap : isEnvDevelopment,
+              },
                 'sass-loader'
               ),
               // Don't consider CSS imports dead code even if the
@@ -516,42 +516,38 @@ module.exports = function (webpackEnv) {
               test: lessRegex,
               exclude: lessModuleRegex,
               use: getStyleLoaders({
-                  importLoaders: 2,
-                  sourceMap: isEnvProduction ?
-                    shouldUseSourceMap : isEnvDevelopment,
-                },
+                importLoaders: 3,
+                modules:true,
+                sourceMap: isEnvProduction ?
+                  shouldUseSourceMap : isEnvDevelopment,
+              },
                 'less-loader'
               ),
-              // Don't consider CSS imports dead code even if the
-              // containing package claims to have no side effects.
-              // Remove this when webpack adds a warning or an error for this.
-              // See https://github.com/webpack/webpack/issues/6571
               sideEffects: true,
             },
-            // Adds support for CSS Modules, but using SASS
-            // using the extension .module.scss or .module.sass
             {
               test: sassModuleRegex,
               use: getStyleLoaders({
-                  importLoaders: 3,
-                  sourceMap: isEnvProduction ?
-                    shouldUseSourceMap : isEnvDevelopment,
-                  modules: {
-                    getLocalIdent: getCSSModuleLocalIdent,
-                  },
+                importLoaders: 3,
+                sourceMap: isEnvProduction ?
+                  shouldUseSourceMap : isEnvDevelopment,
+                modules: {
+                  getLocalIdent: getCSSModuleLocalIdent,
                 },
+              },
                 'sass-loader'
               ),
             },
             {
               test: lessModuleRegex,
               use: getStyleLoaders({
-                  importLoaders: 2,
-                  sourceMap: isEnvProduction ?
-                    shouldUseSourceMap : isEnvDevelopment,
-                  modules: true,
-                  getLocalIdent: getCSSModuleLocalIdent
-                },
+                importLoaders: 3,
+                sourceMap: isEnvProduction ?
+                  shouldUseSourceMap : isEnvDevelopment,
+                modules: {
+                  getLocalIdent: getCSSModuleLocalIdent,
+                }
+              },
                 'less-loader'
               ),
             },
@@ -581,9 +577,9 @@ module.exports = function (webpackEnv) {
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign({}, {
-            inject: true,
-            template: paths.appHtml,
-          },
+          inject: true,
+          template: paths.appHtml,
+        },
           isEnvProduction ? {
             minify: {
               removeComments: true,
@@ -598,7 +594,7 @@ module.exports = function (webpackEnv) {
               minifyURLs: true,
             },
           } :
-          undefined
+            undefined
         )
       ),
       // Inlines the webpack runtime script. This script is too small to warrant
