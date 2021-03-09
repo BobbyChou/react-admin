@@ -1,3 +1,8 @@
+/*
+ * @Author: zhou teng
+ * @Date: 2021-03-09 18:55:04
+ * @LastEditTime: 2021-03-09 19:20:26
+ */
 /// <reference types="node" />
 /// <reference types="react" />
 /// <reference types="react-dom" />
@@ -72,3 +77,4 @@ declare module '*.module.sass' {
 
 declare module '*.less'
 declare module 'classnames';
+declare module "react-router-dom"
