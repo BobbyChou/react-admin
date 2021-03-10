@@ -4,36 +4,31 @@
  * @LastEditTime: 2021-03-09 19:24:30
  */
 import React from 'react'
-import styles from './index.less'
-import { Menu, PageHeader, Tag, Button, Statistic, Descriptions, Row } from 'antd'
+import './index.less'
+import { Menu, PageHeader } from 'antd'
 import { MessageOutlined, BookOutlined } from '@ant-design/icons';
 import { AppConfig } from './../config/main.config'
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import Routes from './../router'
 
 const { SubMenu } = Menu
 
 const Layout = () => {
+
   return (
     <Router>
-      <div className={styles.layoutContainer}>
-        <div className={styles.layoutHeader}>
+      <div className="layoutContainer">
+        <div className="layoutHeader">
           <PageHeader
             className="site-page-header"
             title={AppConfig.name}
             subTitle={AppConfig.describtion}
           ></PageHeader>
         </div>
-        <div className={styles.layoutContent}>
-          <div className={styles.layoutMenu}>
+        <div className="layoutContent">
+          <div className="layoutMenu">
             <Menu
-              onClick={() => { }}
-              style={{ width: 256, height: '100%' }}
+              style={{ width: '12vw', minWidth: '200px', height: '100%' }}
               mode="inline"
             >
               <SubMenu key="sub1" icon={<MessageOutlined />} title="Message">
@@ -48,7 +43,9 @@ const Layout = () => {
               </SubMenu>
             </Menu>
           </div>
-          <div className={styles.layoutBox}></div>
+          <div className="layoutBox">
+            <Routes />
+          </div>
         </div>
       </div>
     </Router>

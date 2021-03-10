@@ -385,6 +385,7 @@ module.exports = function (webpackEnv) {
               options: {
                 limit: imageInlineSizeLimit,
                 name: 'static/media/[name].[hash:8].[ext]',
+                esModule: false,
               },
             },
             // Process application JS with Babel.
@@ -517,7 +518,7 @@ module.exports = function (webpackEnv) {
               exclude: lessModuleRegex,
               use: getStyleLoaders({
                 importLoaders: 3,
-                modules:true,
+                // modules:true,
                 sourceMap: isEnvProduction ?
                   shouldUseSourceMap : isEnvDevelopment,
               },

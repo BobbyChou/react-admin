@@ -17,3 +17,12 @@
 ###### 配置 less-loader 之后提示 is not a function
 
 - less-loader 的版本过高，less-loader@5.0.0
+
+###### <img src={require('')} alt="" />图片无法显示
+```
+...,
+options: {
+  ....,
+  esModule: false,
+}
+```
