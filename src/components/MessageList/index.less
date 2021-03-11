@@ -1,3 +1,9 @@
+.message-list-item {
+  &.active {
+    background-color: lightcyan;
+  }
+}
+
 .message-list-row {
   display: flex;
   flex-direction: row;
@@ -5,6 +11,15 @@
   align-items: center;
   position: relative;
   cursor: pointer;
+  -moz-user-select: none;
+  /*火狐*/
+  -webkit-user-select: none;
+  /*webkit浏览器*/
+  -ms-user-select: none;
+  /*IE10*/
+  -khtml-user-select: none;
+  /*早期浏览器*/
+  user-select: none;
 
   .message-user-avartar {
     width: 45px;
@@ -74,4 +89,9 @@
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+.search-container {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
 }

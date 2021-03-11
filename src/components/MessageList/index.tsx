@@ -1,16 +1,21 @@
 import React from 'react'
 import './index.less'
+import { Input, Avatar } from 'antd'
+import { UserOutlined } from '@ant-design/icons';
+
 
 type Props = {
-  msgList: Array<Object>
+  msgList: Array<Object>,
+  onPressItem: (val: any) => void,
+  selectedUser: any
 }
 type RowData = {
   userInfo: {
-    avartar?: String,
+    avartar?: any,
     userName?: String,
     time: String | Date,
     content: String | undefined
-  }
+  },
 }
 
 const ListRow = (props: RowData) => {
@@ -20,7 +25,8 @@ const ListRow = (props: RowData) => {
   return (
     <div className="message-list-row">
       <div className="message-user-avartar">
-        <img src={avartar || require("../../assets/img/user_default.png")} alt="" />
+        {/* <img src={avartar || require("../../assets/img/user_default.png")} alt="" /> */}
+        {avartar ? <img src={avartar} alt="" /> : <Avatar size={46} icon={<UserOutlined />} />}
       </div>
       <div className="message-info">
         <div className="message-info-top">
@@ -38,12 +44,21 @@ const ListRow = (props: RowData) => {
 
 const MessageList = (props: Props) => {
 
-  const { msgList } = props
+  const { msgList, selectedUser } = props
 
   return (
     <div className="message-list-container">
-      {msgList && msgList.map((item: any) => {
-        return <div key={`${item.userName}`}>
+      <div className="search-container">
+        <Input style={{
+          borderRadius: '10px'
+        }} placeholder="input with clear icon" allowClear />
+      </div>
+      {msgList && msgList.map((item: any, index: number) => {
+        return <div
+          key={`${item.userName}`}
+          className={selectedUser.userName === item.userName ? "message-list-item active" : "message-list-item"}
+          onClick={() => { props.onPressItem(item) }}
+        >
           <ListRow userInfo={item} />
         </div>
       })}
