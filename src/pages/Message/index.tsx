@@ -13,7 +13,6 @@ const Message = (props: any) => {
     { userName: "范冰冰", avartar: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.caishimv.com%2Fsop%2Fuploads%2Fallimg%2F180907%2F15363228392222.jpg&refer=http%3A%2F%2Fwww.caishimv.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1617956425&t=22ac5dc784842de4e6b2c5349f2c8db9", content: "最近在忙吗？有时间一起约饭", time: "16:16" },
   ]
   const [selectedUser, setSelectedUser]: any = useState({})
-
   const onPressItem = (info: any) => {
     setSelectedUser(info)
   }
@@ -36,8 +35,8 @@ const Message = (props: any) => {
           <div className="message-record"></div>
           <div className="move-line"></div>
           <div className="message-textarea">
-            456
-        </div>
+            <textarea placeholder="type the message" className="my-input" />
+          </div>
         </div> : <div className="empty-message-content">
           <Empty description={
             <span>
