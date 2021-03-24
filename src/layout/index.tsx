@@ -1,12 +1,12 @@
 /*
  * @Author: zhou teng
  * @Date: 2021-03-09 18:55:04
- * @LastEditTime: 2021-03-09 19:24:30
+ * @LastEditTime: 2021-03-13 11:26:23
  */
 import React from 'react'
 import './index.less'
 import { Menu, PageHeader } from 'antd'
-import { MessageOutlined, BookOutlined } from '@ant-design/icons';
+import { MessageOutlined, BookOutlined, PieChartOutlined } from '@ant-design/icons';
 import { AppConfig } from './../config/main.config'
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Routes from './../router'
@@ -39,6 +39,11 @@ const Layout = () => {
               <SubMenu key="sub2" icon={<BookOutlined />} title="Documents">
                 <Menu.Item key="2">
                   <Link to="/documents">documents</Link>
+                </Menu.Item>
+              </SubMenu>
+              <SubMenu key="sub3" icon={<PieChartOutlined />} title="LifeCharts">
+                <Menu.Item key="3">
+                  <Link to="/LifeCharts">life charts</Link>
                 </Menu.Item>
               </SubMenu>
             </Menu>

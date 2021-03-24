@@ -1,7 +1,7 @@
 /*
  * @Author: zhou teng
  * @Date: 2021-03-09 18:55:04
- * @LastEditTime: 2021-03-09 19:20:26
+ * @LastEditTime: 2021-03-13 11:22:59
  */
 /// <reference types="node" />
 /// <reference types="react" />
@@ -79,3 +79,4 @@ declare module '*.less'
 declare module 'classnames';
 declare module "react-router-dom"
 declare module "react-redux"
+declare module '*.md'
