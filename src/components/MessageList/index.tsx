@@ -1,4 +1,3 @@
-import React from 'react'
 import './index.less'
 import { Input, Avatar } from 'antd'
 import { UserOutlined } from '@ant-design/icons';

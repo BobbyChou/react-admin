@@ -5,56 +5,90 @@
  */
 import React from 'react'
 import './index.less'
-import { Menu, PageHeader } from 'antd'
-import { MessageOutlined, BookOutlined, PieChartOutlined } from '@ant-design/icons';
+import { Menu, PageHeader, Dropdown } from 'antd'
+import { MessageOutlined, BookOutlined, PieChartOutlined, DownOutlined } from '@ant-design/icons';
 import { AppConfig } from './../config/main.config'
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Routes from './../router'
+import { connect } from 'react-redux'
+import { setWebTheme } from './../store/action'
 
 const { SubMenu } = Menu
 
-const Layout = () => {
+const Layout = (props: any) => {
+
+  const history = useHistory()
+
+  const renderMenu = () => {
+    const themeList = ['#F5222D', '#FA541C', '#FA8C16', '#FAAD14', '#FADB14', '#A0D911', '#52C41A', '#13C2C2']
+    return <Menu>
+      {!!themeList && themeList.map((item) => {
+        return <Menu.Item key={`${item}`}><div style={{
+          backgroundColor: item,
+          height: '20px'
+        }} onClick={() => { props.dispatch(setWebTheme(item)) }}></div></Menu.Item>
+      })}
+    </Menu>
+  }
 
   return (
-    <Router>
-      <div className="layoutContainer">
-        <div className="layoutHeader">
+    <div className="layoutContainer">
+      <div className="layoutHeader" style={{
+        backgroundColor: props.mainState.theme
+      }}>
+        <div className="headerContainer" onClick={() => { history.push('/') }}>
           <PageHeader
             className="site-page-header"
             title={AppConfig.name}
             subTitle={AppConfig.describtion}
           ></PageHeader>
         </div>
-        <div className="layoutContent">
-          <div className="layoutMenu">
-            <Menu
-              style={{ width: '12vw', minWidth: '200px', height: '100%' }}
-              mode="inline"
-            >
-              <SubMenu key="sub1" icon={<MessageOutlined />} title="Message">
-                <Menu.Item key="1">
-                  <Link to="/message">message</Link>
-                </Menu.Item>
-              </SubMenu>
-              <SubMenu key="sub2" icon={<BookOutlined />} title="Documents">
-                <Menu.Item key="2">
-                  <Link to="/documents">documents</Link>
-                </Menu.Item>
-              </SubMenu>
-              <SubMenu key="sub3" icon={<PieChartOutlined />} title="LifeCharts">
-                <Menu.Item key="3">
-                  <Link to="/LifeCharts">life charts</Link>
-                </Menu.Item>
-              </SubMenu>
-            </Menu>
-          </div>
-          <div className="layoutBox">
-            <Routes />
-          </div>
+        <div className="themeContainer">
+          <Dropdown overlay={renderMenu()} trigger={['click']}>
+            <span>Theme color <DownOutlined /></span>
+          </Dropdown>
         </div>
       </div>
-    </Router>
+      <div className="layoutContent">
+        <div className="layoutMenu">
+          <Menu
+            style={{ width: '12vw', minWidth: '200px', height: '100%' }}
+            mode="inline"
+          >
+            <SubMenu key="sub1" icon={<MessageOutlined />} title="Message">
+              <Menu.Item key="1">
+                <Link to="/message">message</Link>
+              </Menu.Item>
+            </SubMenu>
+            <SubMenu key="sub2" icon={<BookOutlined />} title="Documents">
+              <Menu.Item key="2">
+                <Link to="/documents">documents</Link>
+              </Menu.Item>
+            </SubMenu>
+          </Menu>
+        </div>
+        <div className="layoutBox">
+          <Routes />
+        </div>
+      </div>
+    </div>
   )
 }
 
-export default Layout
+const mapStateToProps = (state: any) => {
+  return {
+    mainState: state.MainReducer
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    dispatch
+  }
+}
+
+export default connect((state: any) => {
+  return {
+    mainState: state.MainReducer
+  }
+}, mapDispatchToProps)(Layout)

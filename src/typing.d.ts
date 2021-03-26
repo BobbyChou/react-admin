@@ -77,6 +77,7 @@ declare module '*.module.sass' {
 
 declare module '*.less'
 declare module 'classnames';
-declare module "react-router-dom"
+declare module 'react-router-dom'
 declare module "react-redux"
 declare module '*.md'
+declare module 'reac-router'

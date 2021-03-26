@@ -4,15 +4,16 @@
  * @LastEditTime: 2021-03-06 16:40:42
 -->
 
-###### 脚手架命令
+- cli command (antd, typescript)
 
-- npx create-react-app antd-demo
+```
+  npx create-react-app antd-demo
 
-- yarn create react-app antd-demo-ts --template typescript
+  yarn create react-app antd-demo-ts --template typescript
+```
 
-###### react-app-env.d.ts 文件的作用
-
-- [https://segmentfault.com/a/1190000038874526](https://segmentfault.com/a/1190000038874526)
+- react-app-env.d.ts
+> [https://segmentfault.com/a/1190000038874526](https://segmentfault.com/a/1190000038874526)
 
 ###### 配置 less-loader 之后提示 is not a function
 
@@ -26,3 +27,5 @@ options: {
   esModule: false,
 }
 ```
+
+- `useHistory() return undefined`

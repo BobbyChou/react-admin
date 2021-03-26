@@ -7,15 +7,19 @@ import { createStore } from 'redux'
 import { combineReducers } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+
+import MainReducer from './reducer'
 import MessageReducer from './../pages/Message/store/reducer'
 
 const persistConfig = {
   key: 'root',
-  storage: storage
+  storage: storage,
+  blacklist: ['theme']
 }
 
 const store: any = createStore(persistReducer(persistConfig, combineReducers({
-  MessageReducer
+  MessageReducer,
+  MainReducer
 })))
 const persistor: any = persistStore(store)
 

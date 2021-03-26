@@ -12,8 +12,6 @@ const App = () => {
         </div>
       </PersistGate>
     </Provider>
-
-
   );
 }
 
