@@ -3,8 +3,8 @@
 1. ##### var、let、const
    - let
      - 它的用法类似于var，但是所声明的变量，只在let命令所在的代码块内有效。
-        ***
-     - ```
+     - 下面代码中，变量i是var命令声明的，在全局范围内都有效，所以全局只有一个变量i。每一次循环，变量i的值都会发生改变，而循环内被赋给数组a的函数内部的console.log(i)，里面的i指向的就是全局的i。也就是说，所有数组a的成员里面的i，指向的都是同一个i，导致运行时输出的是最后一轮的i的值，也就是 10
+        ```
         var a = [];
         for (var i = 0; i < 10; i++) {
           a[i] = function () {
@@ -13,34 +13,30 @@
         }
         a[6](); // 10
         ```
-        上面代码中，变量i是var命令声明的，在全局范围内都有效，所以全局只有一个变量i。每一次循环，变量i的值都会发生改变，而循环内被赋给数组a的函数内部的console.log(i)，里面的i指向的就是全局的i。也就是说，所有数组a的成员里面的i，指向的都是同一个i，导致运行时输出的是最后一轮的i的值，也就是 10
         ***
      - var命令会发生“变量提升”现象，即变量可以在声明之前使用，值为undefined。这种现象多多少少是有些奇怪的，按照一般的逻辑，变量应该在声明语句之后才可以使用。
-        ***
-     - ```
+     - 上面代码中，存在全局变量tmp，但是块级作用域内let又声明了一个局部变量tmp，导致后者绑定这个块级作用域，所以在let声明变量前，对tmp赋值会报错。ES6 明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。
+        ```
           var tmp = 123;
           if (true) {
             tmp = 'abc'; // ReferenceError
             let tmp;
           }
         ```
-        上面代码中，存在全局变量tmp，但是块级作用域内let又声明了一个局部变量tmp，导致后者绑定这个块级作用域，所以在let声明变量前，对tmp赋值会报错。ES6 明确规定，如果区块中存在let和const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭作用域。凡是在声明之前就使用这些变量，就会报错。
         ***
      - 不允许重复声明
-        ***
    - const
      - const声明一个只读的常量。一旦声明，常量的值就不能改变。
      - const声明的变量不得改变值，这意味着，const一旦声明变量，就必须立即初始化，不能留到以后赋值。
-        ***
+     - const实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动。对于简单类型的数据（数值、字符串、布尔值），值就保存在变量指向的那个内存地址，因此等同于常量。但对于复合类型的数据（主要是对象和数组），变量指向的内存地址，保存的只是一个指向实际数据的指针，const只能保证这个指针是固定的（即总是指向另一个固定的地址），至于它指向的数据结构是不是可变的，就完全不能控制了。因此，将一个对象声明为常量必须非常小心。
         ```
           const a = [];
           a.push('Hello'); // 可执行
           a.length = 0;    // 可执行
           a = ['Dave'];    // 报错
         ```
-     - const实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动。对于简单类型的数据（数值、字符串、布尔值），值就保存在变量指向的那个内存地址，因此等同于常量。但对于复合类型的数据（主要是对象和数组），变量指向的内存地址，保存的只是一个指向实际数据的指针，const只能保证这个指针是固定的（即总是指向另一个固定的地址），至于它指向的数据结构是不是可变的，就完全不能控制了。因此，将一个对象声明为常量必须非常小心。
 ***
-2. ##### 字符串的新增方法 (_这三个方法都支持第二个参数，表示开始搜索的位置。_)
+1. ##### 字符串的新增方法 (_这三个方法都支持第二个参数，表示开始搜索的位置。_)
    - includes(), startsWith(), endsWith()
    - includes()：返回布尔值，表示是否找到了参数字符串。
    - startsWith()：返回布尔值，表示参数字符串是否在原字符串的头部。
@@ -55,26 +51,27 @@
      - 如果repeat的参数是字符串，则会先转换成数字。
       ***
    - padStart(), apdEnd()
-     - ```
+     - 下面代码中，padStart()和padEnd()一共接受两个参数，第一个参数是字符串补全生效的最大长度，第二个参数是用来补全的字符串。
+        ```
         'x'.padStart(5, 'ab') // 'ababx'
         'x'.padStart(4, 'ab') // 'abax'
         'x'.padEnd(5, 'ab') // 'xabab'
         'x'.padEnd(4, 'ab') // 'xaba'
         ```
-        上面代码中，padStart()和padEnd()一共接受两个参数，第一个参数是字符串补全生效的最大长度，第二个参数是用来补全的字符串。
      - 如果用来补全的字符串与原字符串，两者的长度之和超过了最大长度，则会截去超出位数的补全字符串。
      - 如果省略第二个参数，默认使用空格补全长度。
-     - ```
+     - 另一个用途是提示字符串格式。
+        ```
         '12'.padStart(10, 'YYYY-MM-DD') // "YYYY-MM-12"
         '09-12'.padStart(10, 'YYYY-MM-DD') // "YYYY-09-12"
         ```
-        另一个用途是提示字符串格式。
 ***
-3. ##### 对象的新增方法
+1. ##### 对象的新增方法
    - Object.is()
      - ES5 比较两个值是否相等，只有两个运算符：相等运算符（\==）和严格相等运算符（\===）。它们都有缺点，前者会自动转换数据类型，后者的NaN不等于自身，以及+0等于-0。JavaScript 缺乏一种运算，在所有环境中，只要两个值是一样的，它们就应该相等。
      - 不同之处只有两个：一是+0不等于-0，二是NaN等于自身。
-     - ```
+     - ES5 可以通过下面的代码，部署Object.is
+        ```
         Object.defineProperty(Object, 'is', {
           value: function(x, y) {
           if (x === y) {
@@ -89,7 +86,6 @@
           writable: true
         });
         ```
-        ES5 可以通过下面的代码，部署Object.is。
    - Object.assign()
 ***
 4. ##### <font color='#e4393c'>Proxy</font>
@@ -140,7 +136,7 @@
     > 所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。
    - 对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是Promise这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。
    - 一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果，这时就称为 resolved（已定型）。如果改变已经发生了，你再对Promise对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。
-      ***
+   - 下面代码中，使用Promise包装了一个图片加载的异步操作。如果加载成功，就调用resolve方法，否则就调用reject方法。
       ```
       function loadImageAsync(url) {
         return new Promise(function(resolve, reject) {
@@ -155,8 +151,8 @@
         });
       }
       ```
-   - 上面代码中，使用Promise包装了一个图片加载的异步操作。如果加载成功，就调用resolve方法，否则就调用reject方法。
       ***
+   - 上面代码中，getJSON是对 XMLHttpRequest 对象的封装，用于发出一个针对 JSON 数据的 HTTP 请求，并且返回一个Promise对象。需要注意的是，在getJSON内部，resolve函数和reject函数调用时，都带有参数。
       ```
         const getJSON = function(url) {
           const promise = new Promise(function(resolve, reject){
@@ -188,8 +184,8 @@
           console.error('出错了', error);
         });
       ```
-   - 上面代码中，getJSON是对 XMLHttpRequest 对象的封装，用于发出一个针对 JSON 数据的 HTTP 请求，并且返回一个Promise对象。需要注意的是，在getJSON内部，resolve函数和reject函数调用时，都带有参数。
       ***
+   - 下面代码中，p1是一个 Promise，3 秒之后变为rejected。p2的状态在 1 秒之后改变，resolve方法返回的是p1。由于p2返回的是另一个 Promise，导致p2自己的状态无效了，由p1的状态决定p2的状态。所以，后面的then语句都变成针对后者（p1）。又过了 2 秒，p1变为rejected，导致触发catch方法指定的回调函数。
       ```
         const p1 = new Promise(function (resolve, reject) {
           setTimeout(() => reject(new Error('fail')), 3000)
@@ -204,12 +200,12 @@
           .catch(error => console.log(error))
         // Error: fail
       ```
-   - 上面代码中，p1是一个 Promise，3 秒之后变为rejected。p2的状态在 1 秒之后改变，resolve方法返回的是p1。由于p2返回的是另一个 Promise，导致p2自己的状态无效了，由p1的状态决定p2的状态。所以，后面的then语句都变成针对后者（p1）。又过了 2 秒，p1变为rejected，导致触发catch方法指定的回调函数。
       ***
    - Promise.prototype.then()
      - then方法返回的是一个新的Promise实例（注意，不是原来那个Promise实例）。因此可以采用链式写法，即then方法后面再调用另一个then方法。
    - Promise.prototype.catch()
      - 用于指定发生错误时候的回调函数
+     - 下面代码中，getJSON()方法返回一个 Promise 对象，如果该对象状态变为resolved，则会调用then()方法指定的回调函数；如果异步操作抛出错误，状态就会变为rejected，就会调用catch()方法指定的回调函数，处理这个错误。另外，then()方法指定的回调函数，如果运行中抛出错误，也会被catch()方法捕获。
         ```
           getJSON('/posts.json').then(function(posts) {
             // ...
@@ -218,8 +214,8 @@
             console.log('发生错误！', error);
           });
         ```
-     - 上面代码中，getJSON()方法返回一个 Promise 对象，如果该对象状态变为resolved，则会调用then()方法指定的回调函数；如果异步操作抛出错误，状态就会变为rejected，就会调用catch()方法指定的回调函数，处理这个错误。另外，then()方法指定的回调函数，如果运行中抛出错误，也会被catch()方法捕获。
         ***
+     - 上面代码中，Promise 在resolve语句后面，再抛出错误，不会被捕获，等于没有抛出。因为 Promise 的状态一旦改变，就永久保持该状态，不会再变了。
         ```
           const promise = new Promise(function(resolve, reject) {
             resolve('ok');
@@ -230,7 +226,6 @@
             .catch(function(error) { console.log(error) });
           // ok
         ```
-     - 上面代码中，Promise 在resolve语句后面，再抛出错误，不会被捕获，等于没有抛出。因为 Promise 的状态一旦改变，就永久保持该状态，不会再变了。
         ***
         ```
           const someAsyncThing = function() {
