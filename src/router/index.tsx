@@ -5,7 +5,7 @@
  */
 import { Switch, Route } from "react-router-dom";
 import Message from './../pages/Message'
-import Markdown from './../pages/Markdown'
+import Documents from './../pages/Documents'
 import LifeCharts from './../pages/LifeCharts'
 
 const Routes = () => {
@@ -19,7 +19,7 @@ const Routes = () => {
         <Message />
       </Route>
       <Route path="/documents">
-        <Markdown />
+        <Documents />
       </Route>
       <Route path="/lifecharts">
         <LifeCharts />
