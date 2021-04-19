@@ -19,3 +19,13 @@
           > 在React的setState函数实现中，会根据一个变量 isBatchingUpdate 来判断是直接同步更新this.state还是放到队列中异步更新 。React使用了事务的机制，React的每个生命周期和合成事件都处在一个大的事务当中。在事务的前置钩子中调用batchedUpdates方法修改isBatchingUpdates变量为true，在后置钩子中将变量置为false。原生绑定事件和setTimeout异步的函数没有进入到React的事务当中，或者当他们执行时，刚刚的事务已近结束了，后置钩子触发了，所以此时的setState会直接进入非批量更新模式，表现在我们看来成为了同步SetState
 3. <font color='#73D8FF'>HOC（High Order Component）</font>
    - React 中两种 HOC 的实现方法：Props Proxy (PP) and Inheritance Inversion (II)。两种方法都可以操作 WrappedComponent。
+4. <font color='#73D8FF'>react-router</font>
+   - hash模式
+      - 改变#不触发网页重载
+      - 浏览器不会重新向服务器请求index.html
+      - 改变#会改变浏览器的访问历史
+      - onhashchange事件去监测hash的变更
+   - HTML5 history
+      - 新增的历史记录 API 可以实现无刷新更改地址栏链接，配合 AJAX 可以做到无刷新跳转。
+      - popstate 事件
+      - replaceState

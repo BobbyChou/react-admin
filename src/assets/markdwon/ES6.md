@@ -284,3 +284,12 @@
           );
         ```
         ***
+   - Promise里面碰到的坑
+     - resolve后的代码还是会执行
+     - resolve后用同步错误，不会有任务错误提示
+     - 已经resolve了，再进行resolve活着reject，结果不会有任何变化
+     - 已经resolve了，有同步代码报错，会提示错误，在.then之后
+     - 在resolve前有同步代码报错，catch会捕捉到错误并不会执行下一句代码
+     - 在resolve前有异步报错的代码，不会catch到错误
+     - 异步的resolve之后有错误，捕捉到错误且不会执行异步的resolve
+     - 当resolve为异步且报错代码为异步，会先.then，再报错，不会捕捉到错误
