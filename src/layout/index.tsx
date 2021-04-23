@@ -1,7 +1,7 @@
 /*
  * @Author: zhou teng
  * @Date: 2021-03-09 18:55:04
- * @LastEditTime: 2021-03-13 11:26:23
+ * @LastEditTime: 2021-04-20 13:36:04
  */
 import React, { Fragment, useEffect } from "react";
 import "./index.less";
@@ -65,10 +65,10 @@ const Layout = (props: any) => {
 
   const renderDocumentMenu = () => {
     const documentsMenu = [
-      { id: 0, title: "zes6", name: "es6", compoonent: ES6 },
-      { id: 1, title: "Interview", name: "Interview", compoonent: Interview },
-      { id: 2, title: "react", name: "react", compoonent: REACT },
-      { id: 3, title: "resume", name: "resume", compoonent: RESUME },
+      { id: 'd1', title: "zes6", name: "es6", compoonent: ES6 },
+      { id: 'd2', title: "Interview", name: "Interview", compoonent: Interview },
+      { id: 'd3', title: "react", name: "react", compoonent: REACT },
+      { id: 'd4', title: "resume", name: "resume", compoonent: RESUME },
     ];
     return (
       <Fragment>

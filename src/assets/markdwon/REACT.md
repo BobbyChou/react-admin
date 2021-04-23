@@ -1,3 +1,8 @@
+<!--
+ * @Author: zhou teng
+ * @Date: 2021-04-20 08:39:27
+ * @LastEditTime: 2021-04-20 14:19:43
+-->
 #### React
 
 
@@ -29,3 +34,18 @@
       - 新增的历史记录 API 可以实现无刷新更改地址栏链接，配合 AJAX 可以做到无刷新跳转。
       - popstate 事件
       - replaceState
+5. Hooks
+   - hooks规则
+      - eslint-plugin-react-hooks
+      - 不要在循环，条件或嵌套函数中调用 Hook， 确保总是在你的 React 函数的最顶层以及任何 return 之前调用他们
+      - 只在 React 函数中调用 Hook
+         - 在 React 的函数组件中调用 Hook
+         - 在自定义 Hook 中调用其他 Hook
+   - useState （this.setState），模式是数组的解构赋值
+      - 如果setState的值需要依赖之前state的值，setState可以传入一个函数。函数的参数为更新前的state的值
+   - useEffect：如果你的 effect 返回一个函数，React 将会在执行清除操作时调用它：
+      - React 会在组件卸载的时候执行清除操作
+      - effect 在每次渲染的时候都会执行。这就是为什么 React 会在执行当前 effect 之前对上一个 effect 进行清除
+      - 不传第二个参数的时候，数据更新，都会执行操作，数据没有变化的时候不会执行操作，功能类似于componentDidUpdate
+      - 第二个参数为空数组的时候，功能类似于componentDidMount
+      - useEffect可以返回一个函数，功能类似于componentWillUnmount，返回的函数内部获取到的数据是更新前的数据
